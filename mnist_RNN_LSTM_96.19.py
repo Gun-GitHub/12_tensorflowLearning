@@ -60,6 +60,9 @@ accuracy = tf.reduce_mean(
     )
 )
 
+# 定义保存模型操作
+saver = tf.train.Saver()
+
 # 初始化所有变量
 init = tf.global_variables_initializer()
 
@@ -72,3 +75,4 @@ with tf.Session() as sess:
             sess.run(train_step, feed_dict={x: batch_xs, y: batch_ys})
         acc = sess.run(accuracy, feed_dict={x: x_test, y: y_test_hot})
         print("epoch: %s, acc: %s " % (epoch, acc))
+    saver.save(sess, "model_RNN_LSTM/my_net.ckpt")
